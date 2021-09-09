@@ -9,4 +9,13 @@
     <string name="login">登入</string>
     <string name="application_id">vqYuKPOkLQLYHhk4QTGsGKFwATT4mBIGREI2m8eD</string>
     <string name="confirm">確認</string>
+    <string name="activity_traffic_info">即時交通資訊</string>
+    <string name="traffic_fragment_title">即時交通資訊</string>
+    <string name="setting_fragment_title">設定時區</string>
+    <string name="traffic_last_update">上次資料更新時間: %s</string>
+    <string name="show_detail"><u>查看網頁公告</u></string>
+    <string name="end_time">結束時間: %s</string>
+    <string name="start_time">開始時間: %s</string>
+    <string name="update_time">更新時間: %s</string>
+    <string name="error">錯誤</string>
 </resources>

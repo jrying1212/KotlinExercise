@@ -1,6 +1,7 @@
 package com.jryingyang.kotlinexercise.ui.login
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import com.jryingyang.kotlinexercise.databinding.ActivityLoginBinding
 import com.jryingyang.kotlinexercise.model.ResponseLogin
 import com.jryingyang.kotlinexercise.network.Status
 import com.jryingyang.kotlinexercise.ui.base.BaseAppCompatActivity
+import com.jryingyang.kotlinexercise.ui.traffic.TrafficInfoActivity
 
 class LoginActivity : BaseAppCompatActivity<ActivityLoginBinding>() {
 
@@ -85,7 +87,8 @@ class LoginActivity : BaseAppCompatActivity<ActivityLoginBinding>() {
     }
 
     private fun showLoginSuccess(responseLogin: ResponseLogin) {
-
+        startActivity(Intent(this, TrafficInfoActivity::class.java))
+        finish()
     }
 
     private fun showLoginFailed(errorString: String?) {
