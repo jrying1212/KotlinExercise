@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">KotlinExercise</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="invalid_username">請輸入正確Email格式</string>
+    <string name="invalid_password">密碼不得為空</string>
+    <string name="login_failed">"登入失敗"</string>
+    <string name="no_network">"請先確定是否有網路連線"</string>
+    <string name="login">登入</string>
+    <string name="application_id">vqYuKPOkLQLYHhk4QTGsGKFwATT4mBIGREI2m8eD</string>
+    <string name="confirm">確認</string>
 </resources>
