@@ -12,6 +12,10 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     private var _binding: T? = null
     val binding get() = _binding!!
 
+    private val loadingDialog:LoadingDialog by lazy {
+        LoadingDialog(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,6 +29,19 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        dismissLoadingDialog()
+    }
+
+    fun showLoadingDialog() {
+        if (!loadingDialog.isShowing) {
+            loadingDialog.show()
+        }
+    }
+
+    fun dismissLoadingDialog() {
+        if (loadingDialog.isShowing) {
+            loadingDialog.dismiss()
+        }
     }
 
     protected abstract fun getViewBinding(inflater: LayoutInflater?, viewGroup: ViewGroup?): T

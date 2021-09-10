@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.jryingyang.kotlinexercise.BuildConfig
 import com.jryingyang.kotlinexercise.R
 import com.jryingyang.kotlinexercise.databinding.ActivityLoginBinding
 import com.jryingyang.kotlinexercise.model.ResponseLogin
@@ -32,7 +32,6 @@ class LoginActivity : BaseAppCompatActivity<ActivityLoginBinding>() {
         val username = binding.edtAccount
         val password = binding.edtPassword
         val btnLogin = binding.btnLogin
-        val loading = binding.loading
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -69,15 +68,13 @@ class LoginActivity : BaseAppCompatActivity<ActivityLoginBinding>() {
         }
 
         btnLogin.setOnClickListener {
-            loading.visibility = View.VISIBLE
-            btnLogin.isClickable = false
+            showLoadingDialog()
             loginViewModel.login(
-                getString(R.string.application_id),
+                BuildConfig.X_PARSER_APPLICATION_ID,
                 username.text.toString(),
                 password.text.toString()
             ).observe(this@LoginActivity, Observer {
-                loading.visibility = View.GONE
-                btnLogin.isClickable = true
+                dismissLoadingDialog()
                 when (it.status) {
                     Status.SUCCESS -> showLoginSuccess(it.data ?: return@Observer)
                     Status.ERROR -> showLoginFailed(it.message)
@@ -87,7 +84,9 @@ class LoginActivity : BaseAppCompatActivity<ActivityLoginBinding>() {
     }
 
     private fun showLoginSuccess(responseLogin: ResponseLogin) {
-        startActivity(Intent(this, TrafficInfoActivity::class.java))
+        val intent = Intent(this, TrafficInfoActivity::class.java)
+        intent.putExtra("loginData", responseLogin)
+        startActivity(intent)
         finish()
     }
 

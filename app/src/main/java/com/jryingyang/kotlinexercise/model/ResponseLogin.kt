@@ -1,35 +1,27 @@
 package com.jryingyang.kotlinexercise.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ResponseLogin(
     @SerializedName("username")
     val username: String,
 
-    @SerializedName("isVerifiedReportEmail")
-    val isVerifiedReportEmail:Boolean,
-
     @SerializedName("reportEmail")
     val reportEmail: String,
 
-    @SerializedName("phone")
-    val phone: String,
-
-    @SerializedName("createdAt")
-    val createdAt: String,
-
-    @SerializedName("updatedAt")
-    val updatedAt: String,
+    @SerializedName("timezone")
+    val timezone: Int,
 
     @SerializedName("objectId")
     val objectId: String,
 
     @SerializedName("sessionToken")
-    val sessionToken: String,
+    val sessionToken: String
 
-    @SerializedName("code")
-    val code: String,
-)
+): Parcelable
 
 data class ResponseError(
     @SerializedName("code")

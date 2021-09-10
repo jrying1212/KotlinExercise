@@ -9,7 +9,26 @@
         android:id="@+id/trafficInfoFragment"
         android:name="com.jryingyang.kotlinexercise.ui.traffic.TrafficInfoFragment"
         android:label="TrafficInfoFragment" >
-        <argument android:name="token"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_trafficInfoFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/fadein_left"
+            app:exitAnim="@anim/fadeout_left"
+            app:popEnterAnim="@anim/fadein_left"
+            app:popExitAnim="@anim/fadeout_left" />
+        <argument
+            android:name="loginData"
+            app:argType="com.jryingyang.kotlinexercise.model.ResponseLogin" />
     </fragment>
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.jryingyang.kotlinexercise.ui.setting.SettingFragment"
+        android:label="setting_fragment"
+        tools:layout="@layout/fragment_setting" >
+        <argument
+            android:name="loginData"
+            app:argType="com.jryingyang.kotlinexercise.model.ResponseLogin" />
+    </fragment>
+
 </navigation>

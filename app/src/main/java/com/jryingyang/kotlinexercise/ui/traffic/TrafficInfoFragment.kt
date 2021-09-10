@@ -47,11 +47,11 @@ class TrafficInfoFragment : BaseFragment<FragmentTrafficInfoBinding>(),
     }
 
     private fun updateList() {
-        binding.loading.visibility = View.VISIBLE
+        showLoadingDialog()
 
         viewModel.getTrafficList().observe(viewLifecycleOwner, {
             binding.swipeLayout.isRefreshing = false
-            binding.loading.visibility = View.GONE
+            dismissLoadingDialog()
 
             when (it.status) {
                 Status.SUCCESS -> {

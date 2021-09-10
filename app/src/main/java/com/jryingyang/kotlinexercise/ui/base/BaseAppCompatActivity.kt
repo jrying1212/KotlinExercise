@@ -9,6 +9,10 @@ abstract class BaseAppCompatActivity<T : ViewBinding> : AppCompatActivity() {
     private var _binding: T? = null
     val binding get() = _binding!!
 
+    private val loadingDialog:LoadingDialog by lazy {
+        LoadingDialog(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = getViewBinding()
@@ -19,6 +23,19 @@ abstract class BaseAppCompatActivity<T : ViewBinding> : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        dismissLoadingDialog()
+    }
+
+    fun showLoadingDialog() {
+        if (!loadingDialog.isShowing) {
+            loadingDialog.show()
+        }
+    }
+
+    fun dismissLoadingDialog() {
+        if (loadingDialog.isShowing) {
+            loadingDialog.dismiss()
+        }
     }
 
     protected abstract fun getViewBinding(): T
