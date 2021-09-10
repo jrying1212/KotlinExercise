@@ -8,11 +8,15 @@ import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.jryingyang.kotlinexercise.R
 import com.jryingyang.kotlinexercise.model.ResponseError
+import com.jryingyang.kotlinexercise.model.sharedPreference.ISharePreferenceManager
 import com.jryingyang.kotlinexercise.network.ApiResult
 import com.jryingyang.kotlinexercise.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(
+    private val loginRepository: LoginRepository,
+    private val sharedPreferences: ISharePreferenceManager
+) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -22,6 +26,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             try {
                 val result = loginRepository.login(applicationId, username, password)
                 if (result.isSuccessful) {
+                    sharedPreferences.putString("timezone", result.body()?.timezone.toString())
                     emit(ApiResult.success(data = result.body()))
                 } else {
                     val errorResponse: ResponseError = Gson().fromJson(

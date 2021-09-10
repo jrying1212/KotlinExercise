@@ -33,7 +33,7 @@ class LoginActivity : BaseAppCompatActivity<ActivityLoginBinding>() {
         val password = binding.edtPassword
         val btnLogin = binding.btnLogin
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(this))
             .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {

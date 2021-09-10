@@ -29,7 +29,8 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this, SettingViewModelFactory())
+
+        viewModel = ViewModelProvider(this, SettingViewModelFactory(requireContext()))
             .get(SettingViewModel::class.java)
         setHasOptionsMenu(true)
         (activity as TrafficInfoActivity).supportActionBar?.title =
@@ -37,7 +38,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
         val loginData = arguments?.getParcelable<ResponseLogin>("loginData")
 
-        val selectedTimeZone = viewModel.selectTimeZone.value ?: loginData?.timezone
+        val selectedTimeZone = viewModel.getTimeZone()?: loginData?.timezone
         binding.tvTimeZone.setText("$selectedTimeZone")
 
         initTimezoneData()
@@ -82,7 +83,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
         binding.tvTimeZone.setOnItemClickListener { parent, _, position, _ ->
             val item = parent.getItemAtPosition(position)
-            viewModel.setSelectTimeZone(item as Int)
+            viewModel.selectTimeZone(item as Int)
         }
     }
 
